@@ -10,5 +10,7 @@ namespace eConConsoleApp
     class DatabaseConnection
     {
         private readonly string CONNECTION_STRING = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+
     }
 }
