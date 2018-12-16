@@ -39,7 +39,8 @@ namespace eConConsoleApp
 
                 foreach (SqlCommand cmd in customerInserts)
                 {
-                    
+                    cmd.Connection = connection;
+                    cmd.ExecuteNonQuery();
                 }
 
                 connection.Close();
