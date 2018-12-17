@@ -11,40 +11,12 @@ namespace eConConsoleApp
 {
     class Program
     {
-        //String customerURL = "https://restapi.e-conomic.com/customers?=demo&=demo&demo=true";
-        //String ordersSentURL = "https://restapi.e-conomic.com/orders/sent?=demo&=demo&demo=true";
-        //string CONNECTION_STRING = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
+      
         static void Main(string[] args)
         {
-            ApiExtract ApiExtract = new ApiExtract();
-            DataManagement DataManagement = new DataManagement();
-            String customerURL = "https://restapi.e-conomic.com/customers?=demo&=demo&demo=true";
-            string CONNECTION_STRING = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            DatabaseConnection databaseConnection = new DatabaseConnection();
 
-            JObject o = ApiExtract.GetCustomers(customerURL);
-            List<SqlCommand> customerInserts = DataManagement.GenerateCustomerInserts(o);
-
-            using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
-            {
-                try{
-
-                    connection.Open();
-                }
-                catch (SqlException e)
-                {
-                    e.Message.ToString();
-                }
-                
-
-                foreach (SqlCommand cmd in customerInserts)
-                {
-                    cmd.Connection = connection;
-                    cmd.ExecuteNonQuery();
-                }
-
-                connection.Close();
-            }
+            databaseConnection.InsertCustomers();
 
         }
 
