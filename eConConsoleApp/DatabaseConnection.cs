@@ -12,7 +12,7 @@ namespace eConConsoleApp
     class DatabaseConnection
     {
         private readonly string CONNECTION_STRING = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        private readonly String customerURL = "https://restapi.e-conomic.com/customers?=demo&=demo&demo=true";
+        private readonly string customerURL = "https://restapi.e-conomic.com/customers?=demo&=demo&demo=true";
         //String ordersSentURL = "https://restapi.e-conomic.com/orders/sent?=demo&=demo&demo=true";
 
         ApiExtract ApiExtract = new ApiExtract();
@@ -31,7 +31,7 @@ namespace eConConsoleApp
                 {
 
                     connection.Open();
-                    TruncateCustomerTable(connection);
+                    ClearTables(connection);
                 }
                 catch (SqlException e)
                 {
@@ -48,11 +48,14 @@ namespace eConConsoleApp
             }
         }
 
-        private void TruncateCustomerTable(SqlConnection connection)
+        private void ClearTables(SqlConnection connection)
         {
-            SqlCommand sqlCommand = new SqlCommand { CommandText = "TRUNCATE TABLE Customer;" };
-            sqlCommand.Connection = connection;
-            sqlCommand.ExecuteNonQuery();
+            SqlCommand sqlCommand1 = new SqlCommand { CommandText = "Delete from sale" };
+            SqlCommand sqlCommand2 = new SqlCommand { CommandText = "Delete from Customer" };
+            sqlCommand1.Connection = connection;
+            sqlCommand2.Connection = connection;
+            sqlCommand1.ExecuteNonQuery();
+            sqlCommand2.ExecuteNonQuery();
         }
 
     }
