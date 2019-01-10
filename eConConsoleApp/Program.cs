@@ -1,22 +1,18 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace eConConsoleApp
 {
     class Program
     {
-      
-        static void Main(string[] args)
+        // vores "kør program" metode
+        static void Main(string[] args) 
         {
-            DatabaseConnection databaseConnection = new DatabaseConnection();
+            DatabaseConnection databaseConnection = new DatabaseConnection(); // laver en lokal variabel af klassen
 
-            databaseConnection.InsertCustomers();
+            databaseConnection.InsertCustomers(); // kalder metoden der indsætter alle customers i E-conomic i databasen
 
         }
 
